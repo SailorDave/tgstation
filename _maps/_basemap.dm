@@ -1,9 +1,8 @@
-//#define LOWMEMORYMODE //uncomment this to load centcom and runtime station and thats it.
-
-#include "map_files\generic\CentCom.dmm"
+#define LOWMEMORYMODE //uncomment this to load centcom and runtime station and thats it.
 
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS
+		#include "map_files\generic\CentCom.dmm"
 		#include "map_files\Mining\Lavaland.dmm"
 		#include "map_files\generic\City_of_Cogs.dmm"
 		#include "map_files\debug\runtimestation.dmm"

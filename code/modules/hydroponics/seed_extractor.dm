@@ -186,6 +186,8 @@
 	else if(istype(O.loc, /obj/item/storage))
 		var/obj/item/storage/S = O.loc
 		S.remove_from_storage(O,src)
+	else
+		O.forceMove(src)
 
 	. = 1
 	for (var/datum/seed_pile/N in piles)

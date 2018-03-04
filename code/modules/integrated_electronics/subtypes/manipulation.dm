@@ -242,14 +242,13 @@
 
 /obj/item/integrated_circuit/manipulation/plant_module
 	name = "plant manipulation module"
-	desc = "Used to uproot weeds or harvest plants in trays."
+	desc = "Used to uproot weeds; plant, harvest and compost plants; store seeds in the seed extractor, and insert items into the grinder."
 	icon_state = "plant_m"
-	extended_desc = "The circuit accepts a reference to a hydroponic tray in an adjacent tile. \
-	Mode(0- harvest, 1-uproot weeds, 2-uproot plant) determinies action."
-	cooldown_per_use = 10
+	extended_desc = "The circuit accepts a reference to a hydroponic tray or an item in an adjacent tile. \
+	Mode input(0-harvest, 1-uproot weeds, 2-uproot plant, 3-insert/extract compost/seed/food) determines action."
 	w_class = WEIGHT_CLASS_TINY
 	complexity = 10
-	inputs = list("target" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER)
+	inputs = list("target" = IC_PINTYPE_REF,"source" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER)
 	outputs = list()
 	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out"=IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
@@ -257,30 +256,21 @@
 
 /obj/item/integrated_circuit/manipulation/plant_module/do_work()
 	..()
-	var/turf/T = get_turf(src)
+	var/obj/acting_object = get_object()
 	var/obj/OM = get_pin_data_as_type(IC_INPUT, 1, /obj)
-	if(istype(OM,/obj/structure/spacevine) && get_pin_data(IC_INPUT, 2) == 2)
+	var/obj/O = get_pin_data_as_type(IC_INPUT, 2, /obj/item)
+	if(istype(OM,/obj/structure/spacevine) && check_target(OM) && get_pin_data(IC_INPUT, 3) == 2)
 		qdel(OM)
 		activate_pin(2)
 		return
+	if(!check_target(OM))
+		return FALSE //Can't reach
+
 	var/obj/machinery/hydroponics/AM = OM
-	if(!istype(AM)) //Invalid input
-		return FALSE
-	var/mob/living/M = get_turf(AM)
-	if(!M.Adjacent(T))
-		return //Can't reach
-	switch(get_pin_data(IC_INPUT, 2))
+
+	switch(get_pin_data(IC_INPUT, 3))
 		if(0)
-			if(AM.myseed)
-				if(AM.harvest)
-					AM.myseed.harvest()
-					AM.harvest = 0
-					AM.lastproduce = AM.age
-					if(!AM.myseed.get_gene(/datum/plant_gene/trait/repeated_harvest))
-						qdel(AM.myseed)
-						AM.myseed = null
-						AM.dead = 0
-					AM.update_icon()
+			AM.attack_hand()
 		if(1)
 			AM.weedlevel = 0
 		if(2)
@@ -294,8 +284,65 @@
 			AM.weedlevel = 0 //Has a side effect of cleaning up those nasty weeds
 			AM.dead = 0
 			AM.update_icon()
+		if(3)
+			if(check_target(O))
+				acting_object.visible_message("OBJ CHECK: [check_target(O)]")
+				if(istype(AM, /obj/machinery/hydroponics))
+					acting_object.visible_message("ISTYPE TARGET CHECK: [istype(AM, /obj/machinery/hydroponics)]")
+					var/obj/machinery/hydroponics/TR = AM
+
+					if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/sample))
+						if(!TR.myseed)
+							if(istype(O, /obj/item/seeds/kudzu))
+								investigate_log("had Kudzu planted in it by [acting_object] at ([x],[y],[z])","kudzu")
+							acting_object.visible_message("<span class='notice'>[acting_object] plants [O].</span>")
+							TR.dead = 0
+							TR.myseed = O
+							TR.age = 1
+							TR.plant_health = TR.myseed.endurance
+							TR.lastcycle = world.time
+							O.forceMove(TR)
+							TR.update_icon()
+
+					if(istype(O, /obj/item/reagent_containers/food/snacks))
+						var/transfer_amount
+						acting_object.visible_message("[acting_object] composts [O], spreading it through [TR].")
+						transfer_amount = O.reagents.total_volume
+
+						var/datum/reagents/temp_reagents = new /datum/reagents()
+						temp_reagents.my_atom = TR
+
+						O.reagents.trans_to(temp_reagents, transfer_amount)
+						TR.applyChemicals(temp_reagents)
+						qdel(O)
+
+						temp_reagents.clear_reagents()
+						qdel(temp_reagents)
+					else
+						acting_object.visible_message("TYPE CHECK FAILED")
+						return FALSE
+
+				else if(istype(AM, /obj/machinery/seed_extractor))
+					var/obj/machinery/seed_extractor/SE = AM
+
+					if(istype(O, /obj/item/seeds))
+						SE.add_seed(O)
+						acting_object.visible_message("[acting_object] adds [O] to [SE.name].")
+					if(istype(O, /obj/item/reagent_containers/food/snacks))
+						seedify(O, -1, SE)
+						acting_object.visible_message("[acting_object] extracts [O] in \the [SE.name].")
+
+				else if(istype(AM, /obj/machinery/reagentgrinder))
+					AM.attackby(O)
+
+				else
+					return FALSE
+			else
+				acting_object.visible_message("CHECK OBJECT FAILED")
+				return FALSE
+
 		else
-			activate_pin(2)
+			acting_object.visible_message("INVALID SELECTION")
 			return FALSE
 	activate_pin(2)
 

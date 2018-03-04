@@ -125,10 +125,15 @@
 	if(!I.grind_requirements(src)) //Error messages should be in the objects' definitions
 		return
 
-	if(user.transferItemToLoc(I, src))
-		to_chat(user, "<span class='notice'>You add [I] to [src].</span>")
+	if(user)
+		if(user.transferItemToLoc(I, src))
+			to_chat(user, "<span class='notice'>You add [I] to [src].</span>")
+			holdingitems[I] = TRUE
+			updateUsrDialog()
+			return FALSE
+	else
+		I.forceMove(src)
 		holdingitems[I] = TRUE
-		updateUsrDialog()
 		return FALSE
 
 /obj/machinery/reagentgrinder/attack_paw(mob/user)

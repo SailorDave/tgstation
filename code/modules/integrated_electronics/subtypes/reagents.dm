@@ -186,11 +186,13 @@
 				activate_pin(3)
 				return
 			busy = FALSE
+
 		else
 			reagents.trans_to(AM, transfer_amount)
 
-	else
-		if(!AM.is_drawable() || reagents.total_volume >= reagents.maximum_volume)
+	if(direction_mode == SYRINGE_DRAW)
+		if(reagents.total_volume >= reagents.maximum_volume)
+			acting_object.visible_message("[acting_object] tries to draw from [AM], but the injector is full.")
 			activate_pin(3)
 			return
 
@@ -206,16 +208,23 @@
 					L.visible_message("<span class='danger'>[acting_object] takes a blood sample from [L]!</span>", \
 					"<span class='userdanger'>[acting_object] takes a blood sample from you!</span>")
 				else
+					L.visible_message("<span class='warning'>[acting_object] fails to take a blood sample from [L].</span>", \
+								"<span class='userdanger'>[acting_object] fails to take a blood sample from you!</span>")
 					busy = FALSE
 					activate_pin(3)
 					return
 			busy = FALSE
+
 		else
-			tramount = min(tramount, AM.reagents.total_volume)
 			if(!AM.reagents.total_volume)
+				acting_object.visible_message("<span class='notice'>[acting_object] tries to draw from [AM], but it is empty!</span>")
 				activate_pin(3)
 				return
 
+			if(!AM.is_drawable())
+				activate_pin(3)
+				return
+			tramount = min(tramount, AM.reagents.total_volume)
 			AM.reagents.trans_to(src, tramount)
 	activate_pin(2)
 

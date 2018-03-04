@@ -7,12 +7,14 @@
 	species = "replicapod"
 	plantname = "Replica Pod"
 	product = /mob/living/carbon/human //verrry special -- Urist
+	container_type = INJECTABLE|DRAWABLE
 	lifespan = 50
 	endurance = 8
 	maturation = 10
 	production = 1
 	yield = 1 //seeds if there isn't a dna inside
 	potency = 30
+	var/volume = 5
 	var/ckey = null
 	var/realName = null
 	var/datum/mind/mind = null
@@ -22,27 +24,37 @@
 	var/factions = null
 	var/contains_sample = 0
 
-/obj/item/seeds/replicapod/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/reagent_containers/syringe))
-		if(!contains_sample)
-			for(var/datum/reagent/blood/bloodSample in W.reagents.reagent_list)
-				if(bloodSample.data["mind"] && bloodSample.data["cloneable"] == 1)
-					mind = bloodSample.data["mind"]
-					ckey = bloodSample.data["ckey"]
-					realName = bloodSample.data["real_name"]
-					blood_gender = bloodSample.data["gender"]
-					blood_type = bloodSample.data["blood_type"]
-					features = bloodSample.data["features"]
-					factions = bloodSample.data["factions"]
-					W.reagents.clear_reagents()
-					to_chat(user, "<span class='notice'>You inject the contents of the syringe into the seeds.</span>")
-					contains_sample = 1
-				else
-					to_chat(user, "<span class='warning'>The seeds reject the sample!</span>")
-		else
-			to_chat(user, "<span class='warning'>The seeds already contain a genetic sample!</span>")
-	else
-		return ..()
+/obj/item/seeds/replicapod/Initialize()
+	. = ..()
+
+	create_reagents(volume)
+
+/obj/item/seeds/replicapod/on_reagent_change(changetype)
+	if(changetype == ADD_REAGENT)
+		var/datum/reagent/blood/B = reagents.has_reagent("blood")
+		if(B)
+			if(B.data["mind"] && B.data["cloneable"] == 1)
+				mind = B.data["mind"]
+				ckey = B.data["ckey"]
+				realName = B.data["real_name"]
+				blood_gender = B.data["gender"]
+				blood_type = B.data["blood_type"]
+				features = B.data["features"]
+				factions = B.data["factions"]
+				contains_sample = 1
+				visible_message("<span class='notice'>The [src] is injected with a fresh blood sample.</span>")
+			else
+				visible_message("<span class='warning'>The [src] rejects the sample!</span>")
+
+	if(!reagents.has_reagent("blood"))
+		mind = null
+		ckey = null
+		realName = null
+		blood_gender = null
+		blood_type = null
+		features = null
+		factions = null
+		contains_sample = 0
 
 /obj/item/seeds/replicapod/get_analyzer_text()
 	var/text = ..()
