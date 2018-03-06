@@ -69,6 +69,33 @@
 			set_pin_data(IC_OUTPUT, 2, WEAKREF(src))
 			push_data()
 
+// Hydroponics trays have no reagents holder and handle reagents in their own snowflakey way.
+// This is a dirty hack to make injecting reagents into them work.
+// TODO: refactor that.
+/obj/item/integrated_circuit/reagent/proc/inject_tray(obj/machinery/hydroponics/tray, atom/movable/source, amount)
+	var/atom/movable/acting_object = get_object()
+	var/visi_msg = "[acting_object] transfers fluid into [tray]"
+
+	if(amount > 30 && source.reagents.total_volume >= 30 && tray.using_irrigation)
+		trays = tray.FindConnected()
+		if (trays.len > 1)
+			visi_msg += ", setting off the irrigation system"
+
+	acting_object.visible_message("<span class='notice'>[visi_msg].</span>")
+	playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+
+	var/split = round(amount/trays.len)
+
+	for(var/obj/machinery/hydroponics/H in trays)
+		var/datum/reagents/temp_reagents = new /datum/reagents()
+		temp_reagents.my_atom = H
+
+		source.reagents.trans_to(temp_reagents, split)
+		H.applyChemicals(temp_reagents)
+
+		temp_reagents.clear_reagents()
+		qdel(temp_reagents)
+
 /obj/item/integrated_circuit/reagent/injector
 	name = "integrated hypo-injector"
 	desc = "This scary looking thing is able to pump liquids into whatever it's pointed at."
@@ -119,18 +146,6 @@
 		new_amount = CLAMP(new_amount, 0, volume)
 		transfer_amount = new_amount
 
-// Hydroponics trays have no reagents holder and handle reagents in their own snowflakey way.
-// This is a dirty hack to make injecting reagents into them work.
-// TODO: refactor that.
-/obj/item/integrated_circuit/reagent/proc/inject_tray(obj/machinery/hydroponics/tray, atom/movable/source, amount)
-	var/datum/reagents/temp_reagents = new /datum/reagents()
-	temp_reagents.my_atom = tray
-
-	source.reagents.trans_to(temp_reagents, amount)
-	tray.applyChemicals(temp_reagents)
-
-	temp_reagents.clear_reagents()
-	qdel(temp_reagents)
 
 /obj/item/integrated_circuit/reagent/injector/do_work(ord)
 	switch(ord)

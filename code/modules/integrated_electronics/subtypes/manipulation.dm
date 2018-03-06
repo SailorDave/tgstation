@@ -242,15 +242,16 @@
 
 /obj/item/integrated_circuit/manipulation/plant_module
 	name = "plant manipulation module"
-	desc = "Used to uproot weeds; plant, harvest and compost plants; store seeds in the seed extractor, and insert items into the grinder."
+	desc = "Used to uproot weeds and harvest/plant trays."
 	icon_state = "plant_m"
 	extended_desc = "The circuit accepts a reference to a hydroponic tray or an item in an adjacent tile. \
-	Mode input(0-harvest, 1-uproot weeds, 2-uproot plant, 3-insert/extract compost/seed/food) determines action."
+	Mode input(0-harvest, 1-uproot weeds, 2-uproot plant, 3-plant seed) determines action. \
+	Harvesting returns a list of the harvested plants."
 	w_class = WEIGHT_CLASS_TINY
 	complexity = 10
-	inputs = list("target" = IC_PINTYPE_REF,"source" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER)
-	outputs = list()
-	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out"=IC_PINTYPE_PULSE_OUT)
+	inputs = list("target" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER,"source" = IC_PINTYPE_REF)
+	outputs = list("result" = IC_PINTYPE_LIST)
+	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 50
 
@@ -258,92 +259,100 @@
 	..()
 	var/obj/acting_object = get_object()
 	var/obj/OM = get_pin_data_as_type(IC_INPUT, 1, /obj)
-	var/obj/O = get_pin_data_as_type(IC_INPUT, 2, /obj/item)
-	if(istype(OM,/obj/structure/spacevine) && check_target(OM) && get_pin_data(IC_INPUT, 3) == 2)
-		qdel(OM)
+	var/obj/O = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
+
+	if(!check_target(OM))
+		acting_object.visible_message("CANT REACH: OM = [check_target(OM)]")
+		push_data()
 		activate_pin(2)
 		return
-	if(!check_target(OM))
-		return FALSE //Can't reach
 
-	var/obj/machinery/hydroponics/AM = OM
+	if(istype(OM,/obj/structure/spacevine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
+		acting_object.visible_message("WHAT")
+		qdel(OM)
+		push_data()
+		activate_pin(2)
+		return
 
-	switch(get_pin_data(IC_INPUT, 3))
-		if(0)
-			AM.attack_hand()
-		if(1)
-			AM.weedlevel = 0
-		if(2)
-			if(AM.myseed) //Could be that they're just using it as a de-weeder
-				AM.age = 0
-				AM.plant_health = 0
-				if(AM.harvest)
-					AM.harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
-				qdel(AM.myseed)
-				AM.myseed = null
-			AM.weedlevel = 0 //Has a side effect of cleaning up those nasty weeds
-			AM.dead = 0
-			AM.update_icon()
-		if(3)
-			if(check_target(O))
-				acting_object.visible_message("OBJ CHECK: [check_target(O)]")
-				if(istype(AM, /obj/machinery/hydroponics))
-					acting_object.visible_message("ISTYPE TARGET CHECK: [istype(AM, /obj/machinery/hydroponics)]")
-					var/obj/machinery/hydroponics/TR = AM
+	var/obj/machinery/hydroponics/TR = OM
+	if(istype(TR))
+		acting_object.visible_message("TR IS TYPE: [TR]")
+		switch(get_pin_data(IC_INPUT, 2))
+			if(0)
+				acting_object.visible_message("0")
 
-					if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/sample))
-						if(!TR.myseed)
-							if(istype(O, /obj/item/seeds/kudzu))
-								investigate_log("had Kudzu planted in it by [acting_object] at ([x],[y],[z])","kudzu")
-							acting_object.visible_message("<span class='notice'>[acting_object] plants [O].</span>")
-							TR.dead = 0
-							TR.myseed = O
-							TR.age = 1
-							TR.plant_health = TR.myseed.endurance
-							TR.lastcycle = world.time
-							O.forceMove(TR)
-							TR.update_icon()
+				var/list/harvest_output = TR.attack_hand()
+				for(var/i in 1 to length(harvest_output))
+					harvest_output[i] = WEAKREF(harvest_output[i])
 
-					if(istype(O, /obj/item/reagent_containers/food/snacks))
-						var/transfer_amount
-						acting_object.visible_message("[acting_object] composts [O], spreading it through [TR].")
-						transfer_amount = O.reagents.total_volume
-
-						var/datum/reagents/temp_reagents = new /datum/reagents()
-						temp_reagents.my_atom = TR
-
-						O.reagents.trans_to(temp_reagents, transfer_amount)
-						TR.applyChemicals(temp_reagents)
-						qdel(O)
-
-						temp_reagents.clear_reagents()
-						qdel(temp_reagents)
-					else
-						acting_object.visible_message("TYPE CHECK FAILED")
-						return FALSE
-
-				else if(istype(AM, /obj/machinery/seed_extractor))
-					var/obj/machinery/seed_extractor/SE = AM
-
-					if(istype(O, /obj/item/seeds))
-						SE.add_seed(O)
-						acting_object.visible_message("[acting_object] adds [O] to [SE.name].")
-					if(istype(O, /obj/item/reagent_containers/food/snacks))
-						seedify(O, -1, SE)
-						acting_object.visible_message("[acting_object] extracts [O] in \the [SE.name].")
-
-				else if(istype(AM, /obj/machinery/reagentgrinder))
-					AM.attackby(O)
-
-				else
+				if(harvest_output.len)
+					set_pin_data(IC_OUTPUT, 1, harvest_output)
+					push_data()
+			if(1)
+				acting_object.visible_message("1")
+				TR.weedlevel = 0
+			if(2)
+				acting_object.visible_message("2")
+				if(TR.myseed) //Could be that they're just using it as a de-weeder
+					TR.age = 0
+					TR.plant_health = 0
+					if(TR.harvest)
+						TR.harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
+					qdel(TR.myseed)
+					TR.myseed = null
+				TR.weedlevel = 0 //Has a side effect of cleaning up those nasty weeds
+				TR.dead = 0
+				TR.update_icon()
+			if(3)
+				if(!check_target(O))
+					acting_object.visible_message("CANT REACH: O = [check_target(O)]")
+					activate_pin(2)
 					return FALSE
-			else
-				acting_object.visible_message("CHECK OBJECT FAILED")
-				return FALSE
 
-		else
-			acting_object.visible_message("INVALID SELECTION")
-			return FALSE
+				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/sample))
+					acting_object.visible_message("SEED CHECKED")
+					if(!TR.myseed)
+						if(istype(O, /obj/item/seeds/kudzu))
+							investigate_log("had Kudzu planted in it by [acting_object] at ([x],[y],[z])","kudzu")
+						acting_object.visible_message("<span class='notice'>[acting_object] plants [O].</span>")
+						TR.dead = 0
+						TR.myseed = O
+						TR.age = 1
+						TR.plant_health = TR.myseed.endurance
+						TR.lastcycle = world.time
+						O.forceMove(TR)
+						TR.update_icon()
+				else
+					acting_object.visible_message("3 ISTYPE FAILED: Is seed?: [istype(O, /obj/item/seeds)] Is NOT sample?: [!istype(O, /obj/item/seeds/sample)]")
+	activate_pin(2)
+
+/obj/item/integrated_circuit/manipulation/seed_extractor
+	name = "seed extractor module"
+	desc = "Used to extract seeds from grown produce."
+	icon_state = "plant_m"
+	extended_desc = "The circuit accepts a reference to a plant item and extracts seeds from it, outputting the results to a list."
+	complexity = 8
+	inputs = list("target" = IC_PINTYPE_REF)
+	outputs = list("result" = IC_PINTYPE_LIST)
+	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out" = IC_PINTYPE_PULSE_OUT)
+	spawn_flags = IC_SPAWN_RESEARCH
+	power_draw_per_use = 50
+
+/obj/item/integrated_circuit/manipulation/seed_extractor/do_work()
+	..()
+	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
+	if(!check_target(O))
+		push_data()
+		activate_pin(2)
+		return
+
+	var/list/seed_output = seedify(O, -1)
+	for(var/i in 1 to length(seed_output))
+		seed_output[i] = WEAKREF(seed_output[i])
+
+	if(seed_output.len)
+		set_pin_data(IC_OUTPUT, 1, seed_output)
+		push_data()
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/grabber

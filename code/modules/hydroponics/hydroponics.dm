@@ -850,7 +850,8 @@
 	if(issilicon(user)) //How does AI know what plant is?
 		return
 	if(harvest)
-		myseed.harvest(user)
+		return myseed.harvest(user)
+
 	else if(dead)
 		dead = 0
 		to_chat(user, "<span class='notice'>You remove the dead plant from [src].</span>")
@@ -858,7 +859,8 @@
 		myseed = null
 		update_icon()
 	else
-		examine(user)
+		if(user)
+			examine(user)
 
 /obj/machinery/hydroponics/proc/update_tray(mob/user = usr)
 	harvest = 0

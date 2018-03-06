@@ -219,10 +219,10 @@
 "ek" = (/obj/item/gun/energy/e_gun/stun,/obj/item/gun/energy/e_gun/stun,/obj/item/gun/energy/e_gun/stun,/obj/item/gun/energy/e_gun/stun,/obj/item/gun/energy/e_gun/stun,/turf/open/floor/plasteel,/area/storage/primary)
 "el" = (/obj/machinery/vending/hydroseeds,/turf/open/floor/plasteel,/area/storage/primary)
 "em" = (/obj/effect/turf_decal/plaque{icon_state = "L2"},/turf/open/floor/plasteel,/area/storage/primary)
-"en" = (/obj/effect/turf_decal/plaque{icon_state = "L4"},/obj/item/seeds/apple,/obj/item/seeds/banana,/obj/item/seeds/tomato,/obj/item/seeds/watermelon,/obj/item/seeds/wheat,/obj/item/seeds/sunflower,/obj/item/seeds/pumpkin/blumpkin,/turf/open/floor/plasteel,/area/storage/primary)
+"en" = (/obj/item/seeds/apple,/obj/item/seeds/banana,/obj/item/seeds/tomato,/obj/item/seeds/watermelon,/obj/item/seeds/wheat,/obj/item/seeds/sunflower,/obj/item/seeds/pumpkin/blumpkin,/turf/open/floor/plasteel,/area/storage/primary)
 "eo" = (/obj/machinery/light{dir = 8},/obj/item/reagent_containers/glass/beaker/bluespace,/obj/item/reagent_containers/glass/beaker/bluespace,/obj/item/reagent_containers/glass/beaker/bluespace,/obj/item/reagent_containers/glass/beaker/bluespace,/obj/item/reagent_containers/glass/beaker/bluespace,/turf/open/floor/plasteel,/area/storage/primary)
-"ep" = (/obj/effect/turf_decal/plaque{icon_state = "L8"},/turf/open/floor/plasteel,/area/storage/primary)
-"eq" = (/obj/effect/turf_decal/plaque{icon_state = "L10"},/turf/open/floor/plasteel,/area/storage/primary)
+"ep" = (/obj/item/reagent_containers/food/snacks/grown/tomato/blood,/turf/open/floor/plasteel,/area/storage/primary)
+"eq" = (/obj/item/reagent_containers/food/snacks/grown/carrot,/obj/item/reagent_containers/food/snacks/grown/carrot,/turf/open/floor/plasteel,/area/storage/primary)
 "er" = (/obj/item/storage/part_replacer/bluespace,/turf/open/floor/plasteel,/area/storage/primary)
 "es" = (/obj/effect/turf_decal/plaque{icon_state = "L14"},/turf/open/floor/plasteel,/area/storage/primary)
 "et" = (/obj/machinery/light{dir = 4},/turf/open/floor/plasteel,/area/storage/primary)
@@ -233,7 +233,6 @@
 "ey" = (/obj/machinery/light{dir = 8},/turf/open/floor/plasteel,/area/storage/primary)
 "ez" = (/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/obj/item/disk/plantgene,/turf/open/floor/plasteel,/area/storage/primary)
 "eA" = (/obj/item/device/multitool,/turf/open/floor/plasteel,/area/storage/primary)
-"eB" = (/obj/machinery/camera/autoname{dir = 1},/turf/open/floor/plasteel,/area/storage/primary)
 "eC" = (/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/matter_bin/bluespace,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/capacitor/quadratic,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/manipulator/femto,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/micro_laser/quadultra,/obj/item/stock_parts/scanning_module/triphasic,/obj/item/stock_parts/scanning_module/triphasic,/obj/item/stock_parts/scanning_module/triphasic,/obj/item/stock_parts/scanning_module/triphasic,/obj/item/stock_parts/scanning_module/triphasic,/obj/item/stock_parts/scanning_module/triphasic,/turf/open/floor/plasteel,/area/storage/primary)
 "eD" = (/obj/machinery/atmospherics/components/unary/portables_connector/visible,/turf/open/floor/plasteel,/area/storage/primary)
 "eE" = (/mob/living/carbon/human/species/fly,/turf/open/floor/plasteel,/area/storage/primary)
@@ -246,7 +245,7 @@
 "eL" = (/obj/item/storage/toolbox/mechanical,/turf/open/floor/plasteel,/area/storage/primary)
 "eM" = (/obj/item/reagent_containers/glass/beaker/bluespace{name = "Beaker Supreme"; volume = 30000},/turf/open/floor/plasteel,/area/storage/primary)
 "eN" = (/obj/item/stack/medical/bruise_pack{amount = 1000},/obj/item/stack/medical/gauze{amount = 1000},/turf/open/floor/plasteel,/area/storage/primary)
-"eO" = (/obj/effect/turf_decal/plaque{icon_state = "L6"},/obj/item/reagent_containers/food/snacks/grown/tomato/blood,/turf/open/floor/plasteel,/area/storage/primary)
+"eO" = (/obj/item/reagent_containers/food/snacks/grown/watermelon,/obj/item/reagent_containers/food/snacks/grown/watermelon,/turf/open/floor/plasteel,/area/storage/primary)
 "eP" = (/obj/item/storage/firstaid/brute,/obj/item/storage/firstaid/brute,/obj/item/storage/firstaid/fire,/obj/item/storage/firstaid/fire,/turf/open/floor/plasteel,/area/storage/primary)
 "eQ" = (/obj/item/storage/firstaid/tactical,/obj/item/storage/firstaid/tactical,/obj/item/storage/firstaid/tactical,/turf/open/floor/plasteel,/area/storage/primary)
 "eR" = (/obj/item/stack/cable_coil,/obj/item/stack/cable_coil,/obj/item/stack/cable_coil,/obj/item/stack/cable_coil,/turf/open/floor/plasteel,/area/storage/primary)
@@ -257,14 +256,23 @@
 "eW" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/open/floor/plasteel,/area/storage/primary)
 "eX" = (/obj/machinery/vending/engivend,/turf/open/floor/plasteel,/area/storage/primary)
 "eY" = (/obj/structure/closet/crate/medical,/turf/open/floor/plasteel,/area/storage/primary)
+"eZ" = (/obj/item/seeds/apple,/obj/item/seeds/apple,/obj/item/seeds/apple,/obj/item/seeds/chili,/obj/item/seeds/chili,/turf/open/floor/plasteel,/area/storage/primary)
 "fa" = (/obj/machinery/portable_atmospherics/canister/nob,/turf/open/floor/plasteel,/area/storage/primary)
+"fb" = (/obj/item/integrated_circuit/lists/at,/obj/item/integrated_circuit/lists/pick,/obj/item/integrated_circuit/lists/constructor,/turf/open/floor/plasteel,/area/storage/primary)
+"fc" = (/obj/item/integrated_circuit/reagent/injector,/obj/item/integrated_circuit/reagent/pump,/turf/open/floor/plasteel,/area/storage/primary)
+"fd" = (/obj/item/integrated_circuit/manipulation/plant_module,/obj/item/integrated_circuit/manipulation/seed_extractor,/turf/open/floor/plasteel,/area/storage/primary)
+"fe" = (/obj/item/device/electronic_assembly/medium/medical{opened = 1},/turf/open/floor/plasteel,/area/storage/primary)
+"ff" = (/obj/machinery/hydroponics/constructable{self_sustaining = 0},/turf/open/floor/plasteel,/area/storage/primary)
+"fg" = (/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/syringe,/turf/open/floor/plasteel,/area/storage/primary)
 "fh" = (/obj/structure/reagent_dispensers/watertank/high,/turf/open/floor/plasteel,/area/storage/primary)
+"fi" = (/obj/item/storage/box/syringes,/turf/open/floor/plasteel,/area/storage/primary)
 "fj" = (/obj/structure/table,/turf/open/floor/plasteel,/area/storage/primary)
 "fk" = (/obj/structure/table,/obj/machinery/light,/obj/item/twohanded/fireaxe,/obj/item/extinguisher,/turf/open/floor/plasteel,/area/storage/primary)
 "fl" = (/obj/structure/table,/obj/machinery/camera/autoname{dir = 1},/turf/open/floor/plasteel,/area/storage/primary)
 "fm" = (/obj/structure/table,/obj/item/device/lightreplacer,/turf/open/floor/plasteel,/area/storage/primary)
 "fn" = (/obj/structure/table,/obj/item/storage/box/lights/mixed,/obj/item/storage/box/lights/tubes,/obj/machinery/light,/turf/open/floor/plasteel,/area/storage/primary)
 "fo" = (/obj/structure/table,/obj/item/device/flashlight{pixel_y = 5},/turf/open/floor/plasteel,/area/storage/primary)
+"fp" = (/obj/item/reagent_containers/hypospray,/turf/open/floor/plasteel,/area/storage/primary)
 "fq" = (/obj/machinery/portable_atmospherics/canister/toxins,/turf/open/floor/plasteel,/area/storage/primary)
 "fr" = (/obj/machinery/hydroponics/constructable{self_sustaining = 1},/turf/open/floor/plasteel,/area/storage/primary)
 
@@ -287,17 +295,17 @@ aiaiaaabcbadccbQbPbGbGbGbGbGbGbGbGbGbGbGbQbPbGbGbGbGbGbGbzdidjdjdjcuadacbZdkdldm
 aiaiaaabacbBbCbQbPdqbGbGbGbGbGbGbGbGbGbGdrdsdtbGdvbGbGbGbzdwdxdydzbzadacbZbZbZbZbZaiaiaiaiaiaiaiaiaiaiaiaicacacacacacacacacacabAaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFdGdHdIdIdFdAdAdAdFdIdIdFdFdGdHdFdFdFdIdIdIbzbzbzbzbzbzadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAcacxcacacacacacacacabAaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFdBdCdDdEdJdKdLdMdNefefeLdFdudUdOfjdYdZeaebecedelelecdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAcacacacacacacacaegcabAaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFdSefefefefdPefefdQefeGdRefeoezefemeneOepeqeLesefefetdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAcacacacacacxcacacacabAaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFdSefefefefdPefefdQefeGdRefeoezefemefefefefefesefefetdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAcacacacacacxcacacacabAaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFdTefdPefefefefefefefefdVeNefeMefefdXefefefefefeGeffrdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAcacacacacacacacacacabAaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFeeefefefefeGefefeiejefeheLerefefefefefeGefefeffreffrdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaibAbAbAbAbAbAbAbAbAbAbAbAaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFekefefeGefefefefeveAefeueReCefefefefefefefefeffreffrdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFewefefeEefefefefefefefefefefefefeSeSeSeSeSeSeSfrefeTdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFefefefefefefefefefefefdWefefefefeVeVeVeVeVeVeVfrefeWdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFefefefefdPefeEefefefefeHePefefefefefeffhfhefeffrefefdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFefefefefefefefefefefefexeQefefefefefefefefefeffreffadFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFefefefefefeGeUefdPefefeYeGefeffrfrfrfrfrfrfreffreffadFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFeyefdPefefefefefefefefetefefefefefefefeGefefefefefetdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
-aiaiaaabacaddFefefefefefefeBefefeDefefefefeFeXfjfkfjflfmfnfofqfqfqdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFewefefeEefefefefefefefeffpeffbfcefefefefefefeffrefeTdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFefefefefefefefefefefefdWfgfifefdefefefefefefeffrefeWdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFefefefefefefefefefefefeHePehenepeqeOeLfhfhefeffrefefdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFefefefefefefefefefefefexeQeiejdLefeZefefefefeffreffadFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFefefefefefeGeUefdPefefeYeGeveAfffffrfrfrfrfreffreffadFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFeyefeSeSeSeSeSeSeSefefetefefefefefefefeGefefefefefetdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
+aiaiaaabacaddFefefeVeVeVeVeVeVeVeDefefefefeFeXfjfkfjflfmfnfofqfqfqdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacaddFdFdFdFdFdFdFdFdFdFeIdFdFdFdFdFdFdFdFdFdFdFdFdFdFdFdFdFadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacadadadadadadadadadadadeJadadadadadadadadadadadadadadadadadadacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
 aiaiaaabacacacacacacacacacacacaceIacacacacacacacacacacacacacacacacacacacabaaaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiai
