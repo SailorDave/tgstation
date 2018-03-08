@@ -74,6 +74,7 @@
 // TODO: refactor that.
 /obj/item/integrated_circuit/reagent/proc/inject_tray(obj/machinery/hydroponics/tray, atom/movable/source, amount)
 	var/atom/movable/acting_object = get_object()
+	var/list/trays = list(tray)
 	var/visi_msg = "[acting_object] transfers fluid into [tray]"
 
 	if(amount > 30 && source.reagents.total_volume >= 30 && tray.using_irrigation)
@@ -165,7 +166,7 @@
 		return
 
 	if(!AM.reagents)
-		if(istype(AM, /obj/machinery/hydroponics) && direction_mode == SYRINGE_INJECT && reagents.total_volume)//injection into tray.
+		if(istype(AM, /obj/machinery/hydroponics) && direction_mode == SYRINGE_INJECT && reagents.total_volume && transfer_amount)//injection into tray.
 			inject_tray(AM, src, transfer_amount)
 			activate_pin(2)
 			return

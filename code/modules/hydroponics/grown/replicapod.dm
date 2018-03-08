@@ -63,10 +63,11 @@
 	return text
 
 
-/obj/item/seeds/replicapod/harvest(mob/user = usr) //now that one is fun -- Urist
+/obj/item/seeds/replicapod/harvest(mob/user) //now that one is fun -- Urist
 	var/obj/machinery/hydroponics/parent = loc
 	var/make_podman = 0
 	var/ckey_holder = null
+	var/list/result = list()
 	if(CONFIG_GET(flag/revival_pod_plants))
 		if(ckey)
 			for(var/mob/M in GLOB.player_list)
@@ -121,6 +122,8 @@
 		var/output_loc = parent.Adjacent(user) ? user.loc : parent.loc //needed for TK
 		for(var/i=0,i<seed_count,i++)
 			var/obj/item/seeds/replicapod/harvestseeds = src.Copy()
+			result.Add(harvestseeds)
 			harvestseeds.forceMove(output_loc)
 
 	parent.update_tray()
+	return result

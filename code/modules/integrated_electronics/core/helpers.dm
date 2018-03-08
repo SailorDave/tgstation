@@ -58,6 +58,10 @@
 	return
 
 /datum/integrated_io/proc/get_data()
+	if(islist(data))
+		for(var/i in 1 to length(data))
+			if(isweakref(data[i]))
+				data[i] = data[i].resolve()
 	if(isweakref(data))
 		return data.resolve()
 	return data

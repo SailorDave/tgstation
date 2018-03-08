@@ -249,7 +249,7 @@
 	Harvesting returns a list of the harvested plants."
 	w_class = WEIGHT_CLASS_TINY
 	complexity = 10
-	inputs = list("target" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER,"source" = IC_PINTYPE_REF)
+	inputs = list("tray" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER,"item" = IC_PINTYPE_REF)
 	outputs = list("result" = IC_PINTYPE_LIST)
 	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
@@ -262,13 +262,11 @@
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
 	if(!check_target(OM))
-		acting_object.visible_message("CANT REACH: OM = [check_target(OM)]")
 		push_data()
 		activate_pin(2)
 		return
 
 	if(istype(OM,/obj/structure/spacevine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
-		acting_object.visible_message("WHAT")
 		qdel(OM)
 		push_data()
 		activate_pin(2)
@@ -276,11 +274,8 @@
 
 	var/obj/machinery/hydroponics/TR = OM
 	if(istype(TR))
-		acting_object.visible_message("TR IS TYPE: [TR]")
 		switch(get_pin_data(IC_INPUT, 2))
 			if(0)
-				acting_object.visible_message("0")
-
 				var/list/harvest_output = TR.attack_hand()
 				for(var/i in 1 to length(harvest_output))
 					harvest_output[i] = WEAKREF(harvest_output[i])
@@ -289,10 +284,8 @@
 					set_pin_data(IC_OUTPUT, 1, harvest_output)
 					push_data()
 			if(1)
-				acting_object.visible_message("1")
 				TR.weedlevel = 0
 			if(2)
-				acting_object.visible_message("2")
 				if(TR.myseed) //Could be that they're just using it as a de-weeder
 					TR.age = 0
 					TR.plant_health = 0
@@ -305,12 +298,10 @@
 				TR.update_icon()
 			if(3)
 				if(!check_target(O))
-					acting_object.visible_message("CANT REACH: O = [check_target(O)]")
 					activate_pin(2)
 					return FALSE
 
 				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/sample))
-					acting_object.visible_message("SEED CHECKED")
 					if(!TR.myseed)
 						if(istype(O, /obj/item/seeds/kudzu))
 							investigate_log("had Kudzu planted in it by [acting_object] at ([x],[y],[z])","kudzu")
@@ -322,8 +313,6 @@
 						TR.lastcycle = world.time
 						O.forceMove(TR)
 						TR.update_icon()
-				else
-					acting_object.visible_message("3 ISTYPE FAILED: Is seed?: [istype(O, /obj/item/seeds)] Is NOT sample?: [!istype(O, /obj/item/seeds/sample)]")
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/seed_extractor
